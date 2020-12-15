@@ -179,8 +179,18 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  let element = null;
+  const used = [];
+  const newStr = str.split(' ').join('');
+  for (let i = 0; i < newStr.length; i += 1) {
+    if ((newStr.indexOf(newStr[i], i + 1) === -1) && (!used.includes(newStr[i]))) {
+      element = newStr[i];
+      return element;
+    }
+    used.push(newStr[i]);
+  }
+  return element;
 }
 
 
@@ -288,9 +298,27 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const fullNumber = String(ccn);
+  let sum = 0;
+
+  for (let i = 0; i < fullNumber.length; i += 1) {
+    let num = parseInt(fullNumber[i], 10);
+
+    if ((fullNumber.length - i) % 2 === 0) {
+      num *= 2;
+
+      if (num > 9) {
+        num -= 9;
+      }
+    }
+
+    sum += num;
+  }
+
+  return sum % 10 === 0;
 }
+
 
 /**
  * Returns the digital root of integer:
